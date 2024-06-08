@@ -1,20 +1,12 @@
 package ali.ikbal.main.entity;
 
 public class EntityBalance {
-    private String bankAccount;
     private double amount;
+    private String accountNumber;
 
-    public EntityBalance(double amount, String bankAccount) {
+    public EntityBalance(double amount, String accountNumber) {
         this.amount = amount;
-        this.bankAccount = bankAccount;
-    }
-
-    public String getBankAccount() {
-        return bankAccount;
-    }
-
-    public void setBankAccount(String bankAccount) {
-        this.bankAccount = bankAccount;
+        this.accountNumber = accountNumber;
     }
 
     public double getAmount() {
@@ -23,6 +15,14 @@ public class EntityBalance {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
 }

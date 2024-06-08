@@ -30,6 +30,11 @@ public class UtilInput {
         return scanner.nextLine();
     }
 
+    public static String inputAccount() {
+        System.out.print("Masukan Account Anda : ");
+        return scanner.nextLine();
+    }
+
     public static double inputAmount() {
         System.out.print("Masukan Jumlah Transfer : ");
         return scanner.nextDouble();

@@ -2,8 +2,6 @@ package ali.ikbal.main.test.service;
 
 import java.util.Scanner;
 
-import ali.ikbal.main.entity.EntityBalance;
-import ali.ikbal.main.entity.EntityBankAccount;
 import ali.ikbal.main.repository.repositoryImplementation.BankAccountRepositoryImpl;
 import ali.ikbal.main.repository.repositoryImplementation.PaymentPulsaRepositoryImpl;
 import ali.ikbal.main.repository.repositoryImplementation.PaymentTokenRepositoryImpl;
@@ -25,9 +23,6 @@ public class ServicBankAccountTest {
         public static void main(String[] args) {
 
                 BankAccountRepositoryImpl bankAccountRepository = new BankAccountRepositoryImpl();
-                bankAccountRepository.addBankAccount(
-                                new EntityBankAccount("123456", "1111", new EntityBalance(100000.0, "123456")),
-                                new EntityBankAccount("654321", "2222", new EntityBalance(200000.0, "654321")));
 
                 PaymentPulsaRepositoryImpl paymentPulsa = new PaymentPulsaRepositoryImpl();
                 PaymentTokenRepositoryImpl paymentToken = new PaymentTokenRepositoryImpl();
@@ -46,7 +41,6 @@ public class ServicBankAccountTest {
 
                 int attempts = 0;
                 boolean isAuthenticated = false;
-
                 while (attempts < 3 && !isAuthenticated) {
                         // Prompt user for PIN input
                         String pin = UtilInput.inputPin();

@@ -2,6 +2,7 @@ package ali.ikbal.main.view;
 
 import java.util.Scanner;
 
+import ali.ikbal.main.entity.EntityBankAccount;
 import ali.ikbal.main.entity.EntityPaymentPulsa;
 import ali.ikbal.main.entity.EntityPaymentToken;
 import ali.ikbal.main.service.BalanceService;
@@ -19,6 +20,7 @@ public class BankAccountView {
     private final Scanner scanner;
     private final PaymentPulsaService paymentPulsa;
     private final PaymentTokenService paymentToken;
+    private EntityBankAccount loggedInAccount; // Variable to store currently logged-in user's account
 
     public BankAccountView(BankAccountService bankAccountService, BalanceService balanceService, Scanner scanner,
             TransferService transferService, PaymentPulsaService paymentPulsa, PaymentTokenService paymentToken) {
@@ -71,13 +73,18 @@ public class BankAccountView {
 
     private void handleDeposit() {
         double amount = UtilInput.inputDeposit();
-        System.out.println(amount);
+        // System.out.println(amount);
+        // String fromAccount = UtilInput.inputAccount();
+
         double newBalance = balanceService.deposit("123456", amount); // Example account number
         System.out.println("Deposit successful. New balance: " + newBalance);
     }
 
     private void handleWithdraw() {
         double amount = withdrawOptions();
+        // String fromAccount = UtilInput.inputAccount();
+        // System.out.println(fromAccount);
+
         double balance = bankAccountService.showBankAccount("123456").getBalance().getAmount(); // Example account
         if (balance < amount) {
             System.out.println("Saldo Anda Tidak Cukup");
@@ -93,10 +100,12 @@ public class BankAccountView {
         // Implement transfer logic here
 
         System.out.print("Enter the recipient account number: ");
+
+        String fromAccount = UtilInput.inputAccount();
         String toAccount = scanner.next();
         double amount = UtilInput.inputAmount();
 
-        boolean success = transferService.transfer("123456", toAccount, amount); // Example account number
+        boolean success = transferService.transfer(fromAccount, toAccount, amount); // Example account number
         if (success) {
             System.out.println("Transfer successful.");
         } else {
@@ -105,6 +114,8 @@ public class BankAccountView {
     }
 
     private void handleCheckBalance() {
+        String fromAccount = loggedInAccount.getAccountNumber();
+        // System.out.println(fromAccount);
         double balance = bankAccountService.showBankAccount("123456").getBalance().getAmount(); // Example account
                                                                                                 // number
         System.out.println("Current balance: " + balance);
@@ -164,6 +175,10 @@ public class BankAccountView {
         } else {
             return -1; // Invalid choice
         }
+    }
+
+    public void setLoggedInAccount(EntityBankAccount account) {
+        this.loggedInAccount = account;
     }
 
 }

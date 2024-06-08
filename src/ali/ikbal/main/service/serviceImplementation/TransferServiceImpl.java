@@ -6,7 +6,7 @@ import ali.ikbal.main.service.TransferService;
 
 public class TransferServiceImpl implements TransferService {
 
-    BankAccountRepository bankAccountRepository;
+    private BankAccountRepository bankAccountRepository;
 
     public TransferServiceImpl(BankAccountRepository bankAccountRepository) {
         this.bankAccountRepository = bankAccountRepository;
@@ -18,7 +18,7 @@ public class TransferServiceImpl implements TransferService {
         EntityBankAccount fromBankAccount = bankAccountRepository.getBankAccountByNumber(accountNumber);
         EntityBankAccount toBankAccount = bankAccountRepository.getBankAccountByNumber(toAccountNumber);
 
-        if (accountNumber != null && toAccountNumber != null && fromBankAccount.getBalance().getAmount() >= amount) {
+        if (fromBankAccount != null && toBankAccount != null && fromBankAccount.getBalance().getAmount() >= amount) {
             double newFromBalance = fromBankAccount.getBalance().getAmount() - amount;
             double newToBalance = toBankAccount.getBalance().getAmount() + amount;
 
